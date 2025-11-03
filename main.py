@@ -84,8 +84,8 @@ demo = gr.Interface(
         gr.Image(type="numpy", label="Processed Result"),
         gr.Markdown(label="Prediction Details")
     ],
-    title="Fossil Scanner AI",
-    description="Upload a fossil image, AI will detect it automatically. Bounding boxes will be outlined with a label card.",
+    title="Welcome to the AI Fossil Scanner"
+    description="Upload a fossil image; AI will detect it automatically. Bounding boxes will be outlined with a label card.",
     theme="default",
     examples=[["th.jpg"]]
 )

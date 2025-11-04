@@ -5,3 +5,4 @@ roboflow
 opencv-python-headless
 opencv-python
 inference-cli
+gradio

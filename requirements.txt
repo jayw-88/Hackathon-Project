@@ -1,7 +1,7 @@
-streamlit
-inference-sdk
-ultralytics
-roboflow
-opencv-python-headless
-opencv-python
-inference-cli
+streamlit==1.29.0
+inference-sdk==0.2.6
+ultralytics==8.0.197
+roboflow==1.1.27
+opencv-python-headless==4.8.1.78
+opencv-python==4.8.1.78
+inference-cli==0.5.2

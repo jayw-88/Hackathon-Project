@@ -3,6 +3,7 @@ import gradio as gr
 from inference_sdk import InferenceHTTPClient
 from groq import Groq
 import os
+import streamlit as st
 
 # Initalize Groq AI API key
 client = Groq(api_key = os.environ["GROQ_API_KEY"])

@@ -1,7 +1,11 @@
 import cv2
-import numpy as np
 import gradio as gr
 from inference_sdk import InferenceHTTPClient
+from groq import Groq
+import os
+
+# Initalize Groq AI API key
+client = Groq(api_key = os.environ["GROQ_API_KEY"])
 
 # Initialize Roboflow client
 CLIENT = InferenceHTTPClient(
@@ -71,10 +75,19 @@ def process_image(frame):
 
     merged = cv2.addWeighted(overlay, 0.8, img, 0.2, 0)
     label, confidence = predictions[0]["class"], predictions[0]["confidence"]
+    user = f"Give a thorough description on {label} Put it in the format following a general one-paragraph description, then a description of physical charateristcs and composition. Then put a list of uses and signifance of the artifact. (Don't include sources)"
+    chat_completion = client.chat.completions.create(
+                messages=[
+                    {"role": "user", "content": user}
+                ],
+                model="llama-3.1-8b-instant"
+            )
+    response = chat_completion.choices[0].message.content
+
     final_img = draw_fixed_label(merged.copy(), label, confidence)
 
     output = cv2.cvtColor(final_img, cv2.COLOR_BGR2RGB)
-    info = f"**{label.title()}** — {confidence*100:.2f}%"
+    info = f"**{label.title()}** — {confidence*100:.2f}%\n**Description:**\n{response}"
     return output, info
 
 demo = gr.Interface(
@@ -84,11 +97,11 @@ demo = gr.Interface(
         gr.Image(type="numpy", label="Processed Result"),
         gr.Markdown(label="Prediction Details")
     ],
-    title="Welcome to the AI Fossil Scanner"
-    description="Upload a fossil image; AI will detect it automatically. Bounding boxes will be outlined with a label card.",
+    title="AI Fossil Scanner",
+    description="Upload a fossil image; AI will detect it automatically and give a detailed description on the given fossil. Bounding boxes will be outlined with a label card.",
     theme="default",
     examples=[["th.jpg"]]
 )
 
 if __name__ == "__main__":
-    demo.launch(share=True)
+    demo.launch(server_name="0.0.0.0", server_port=5000, share=True)

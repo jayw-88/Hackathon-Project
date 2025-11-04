@@ -1,4 +1,7 @@
-opencv-python
-numpy
-gradio
+streamlit
 inference-sdk
+ultralytics
+roboflow
+opencv-python-headless
+opencv-python
+inference-cli

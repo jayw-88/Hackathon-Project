@@ -113,3 +113,5 @@ demo = gr.Interface(
     theme="default",
     examples=[["th.jpg"]]
 )
+if __name__ == "__main__":
+    demo.launch(share=True)

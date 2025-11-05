@@ -9,8 +9,8 @@ import time
 st.title("")
 
 # Replace the Gradio interface URL with your generated share link
-gradio_interface_url = "http://0.0.0.0:5000"
-#https://baa03635463a8706a5.gradio.live
+gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
+
 
 # Load the Gradio interface using an iframe
 st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',

@@ -8,9 +8,6 @@ import time
 # Display Streamlit content
 st.title("")
 
-import subprocess
-aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
-
 # Replace the Gradio interface URL with your generated share link
 gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
 

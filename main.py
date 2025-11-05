@@ -4,11 +4,22 @@ from inference_sdk import InferenceHTTPClient
 from groq import Groq
 import os
 import streamlit as st
-import threading
-import time
+import time 
+
+# Display Streamlit content
+st.title("")
+
+import subprocess
+aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
+
+# Replace the Gradio interface URL with your generated share link
+gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
+
+# Load the Gradio interface using an iframe
+st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',unsafe_allow_html=True)
 
 # Initialize Groq AI API key
-client = Groq(api_key=os.environ["GROQ_API_KEY"])
+client = Groq(api_key = os.environ["GROQ_API_KEY"])
 
 # Initialize Roboflow client
 CLIENT = InferenceHTTPClient(
@@ -35,8 +46,10 @@ def draw_fixed_label(img, label, confidence):
     cv2.rectangle(overlay, (x, y - lh - pad), (x + box_w, y + box_h - lh), (20, 20, 20), -1)
     cv2.addWeighted(overlay, 0.7, img, 0.3, 0, img)
 
-    cv2.putText(img, label_text, (x + pad, y), font, label_scale, (255, 255, 255), label_thick, cv2.LINE_AA)
-    cv2.putText(img, conf_text, (x + pad, y + lh + pad), font, conf_scale, (144, 238, 144), conf_thick, cv2.LINE_AA)
+    cv2.putText(img, label_text, (x + pad, y),
+                font, label_scale, (255, 255, 255), label_thick, cv2.LINE_AA)
+    cv2.putText(img, conf_text, (x + pad, y + lh + pad),
+                font, conf_scale, (144, 238, 144), conf_thick, cv2.LINE_AA)
     cv2.rectangle(img, (x + pad, y + lh + pad + 5),
                   (x + pad + int(confidence * (box_w - pad * 2)), y + lh + pad + 8),
                   (0, 255, 0), -1)
@@ -45,8 +58,11 @@ def draw_fixed_label(img, label, confidence):
 def process_image(frame):
     if frame is None:
         return None, "No image uploaded."
+
     img = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
     cv2.imwrite("temp.jpg", img)
+
+
 
     try:
         result = CLIENT.infer("temp.jpg", model_id=MODEL_ID)
@@ -76,40 +92,31 @@ def process_image(frame):
 
     merged = cv2.addWeighted(overlay, 0.8, img, 0.2, 0)
     label, confidence = predictions[0]["class"], predictions[0]["confidence"]
-    user = f"Give a thorough description of {label}. Put it in the format following a general one-paragraph description, then a description of physical characteristics and composition. Then put a list of uses and significance of the artifact. (Don't include sources)"
+    user = f"Give a thorough description on {label} Put it in the format following a general one-paragraph description, then a description of physical characteristics and composition. Then put a list of uses and signifance of the artifact. (Don't include sources)"
     chat_completion = client.chat.completions.create(
-        messages=[{"role": "user", "content": user}],
-        model="llama-3.1-8b-instant"
-    )
-    response = chat_completion.choices[0].message.content
+                messages=[
+                    {"role": "user", "content": user}
+                ],
+                model="llama-3.1-8b-instant"
+            )
 
+    response = chat_completion.choices[0].message.content
     final_img = draw_fixed_label(merged.copy(), label, confidence)
     output = cv2.cvtColor(final_img, cv2.COLOR_BGR2RGB)
     info = f"**{label.title()}** — {confidence*100:.2f}%\n**Description:**\n{response}"
     return output, info
 
-# Launch Gradio in a background thread
-def launch_gradio():
-    demo = gr.Interface(
-        fn=process_image,
-        inputs=gr.Image(type="numpy", label="Upload a Fossil Image"),
-        outputs=[
-            gr.Image(type="numpy", label="Processed Result"),
-            gr.Markdown(label="Prediction Details")
-        ],
-        title="AI Fossil Scanner",
-        description="Upload a fossil image; AI will detect it automatically and give a detailed description.",
-        theme="default",
-        examples=[["th.jpg"]]
-    )
-    demo.launch(server_name="0.0.0.0", server_port=7860, share=False)
+demo = gr.Interface(
+    fn=process_image,
+    inputs=gr.Image(type="numpy", label="Upload a Fossil Image"),
+    outputs=[
+        gr.Image(type="numpy", label="Processed Result"),
+        gr.Markdown(label="Prediction Details")
+    ],
 
-threading.Thread(target=launch_gradio, daemon=True).start()
-time.sleep(2)  # Give Gradio time to start
+    title="AI Fossil Scanner",
+    description="Upload a fossil image; AI will detect it automatically and give a detailed description on the given fossil. Bounding boxes will be outlined with a label card.",
+    theme="default",
+    examples=[["th.jpg"]]
 
-# Display Streamlit content
-st.set_page_config(page_title="Fossil Scanner", layout="centered")
-st.title("AI Fossil Scanner")
-
-# Embed the local Gradio app
-st.write(f'<iframe src="http://localhost:7860" width="800" height="600"></iframe>', unsafe_allow_html=True)
+)

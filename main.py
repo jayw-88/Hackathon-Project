@@ -111,9 +111,9 @@ demo = gr.Interface(
     examples=[["th.jpg"]]
 
 )
-gradio_interface_url = demo.launch(share=True).public_url
+gradio_url = demo.launch(share=True).public_url
 
 # Replace the Gradio interface URL with your generated share link
-st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>', unsafe_allow_html=True)
+st.write(f'<iframe src="{gradio_url}" width="800" height="600"></iframe>', unsafe_allow_html=True)
 
 demo.launch(share=True)

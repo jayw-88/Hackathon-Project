@@ -14,6 +14,8 @@ aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
 # Replace the Gradio interface URL with your generated share link
 gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
 #http://0.0.0.0:5000
+demo.launch(server_name="0.0.0.0", server_port=7860, share=True)
+
 
 # Load the Gradio interface using an iframe
 st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',

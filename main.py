@@ -89,7 +89,7 @@ def process_image(frame):
 
     merged = cv2.addWeighted(overlay, 0.8, img, 0.2, 0)
     label, confidence = predictions[0]["class"], predictions[0]["confidence"]
-    user = f"Give a thorough description on {label} Put it in the format following a general one-paragraph description, then a description of physical charateristcs and composition. Then put a list of uses and signifance of the artifact. (Don't include sources)"
+    user = f"Give a thorough description on {label} Put it in the format following a general one-paragraph description, then a description of physical characteristics and composition. Then put a list of uses and signifance of the artifact. (Don't include sources)"
     chat_completion = client.chat.completions.create(
                 messages=[
                     {"role": "user", "content": user}
@@ -116,6 +116,7 @@ demo = gr.Interface(
     theme="default",
     examples=[["th.jpg"]]
 )
-
+'''
 if __name__ == "__main__":
     demo.launch(server_name="0.0.0.0", server_port=9871, share=True)
+'''

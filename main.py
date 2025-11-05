@@ -15,7 +15,7 @@ aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
 gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
 
 # Load the Gradio interface using an iframe
-st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
+st.write(f'<iframe src="{gradio_interface_url}" width="1200" height="900"></iframe>',
          unsafe_allow_html=True)
 
 # Initialize Groq AI API key

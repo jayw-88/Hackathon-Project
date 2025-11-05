@@ -10,7 +10,6 @@ st.title("Streamlit App with Gradio Integration")
 
 import subprocess
 aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
-demo.launch(server_name="0.0.0.0", server_port=7860, share=True)
 
 # Replace the Gradio interface URL with your generated share link
 gradio_interface_url = "https://baa03635463a8706a5.gradio.live"

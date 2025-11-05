@@ -1,9 +1,23 @@
-#import cv2
-#import gradio as gr
-#from inference_sdk import InferenceHTTPClient
+import cv2
+import gradio as gr
+from inference_sdk import InferenceHTTPClient
 from groq import Groq
 import os
 import streamlit as st
+import time 
+# Display Streamlit content
+st.title("Streamlit App with Gradio Integration")
+
+import subprocess
+aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
+
+# Replace the Gradio interface URL with your generated share link
+gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
+#http://0.0.0.0:5000
+
+# Load the Gradio interface using an iframe
+st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
+         unsafe_allow_html=True)
 
 # Initialize Groq AI API key
 client = Groq(api_key = os.environ["GROQ_API_KEY"])

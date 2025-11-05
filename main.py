@@ -6,7 +6,7 @@ import os
 import streamlit as st
 import time 
 # Display Streamlit content
-st.title("Streamlit App with Gradio Integration")
+st.title("")
 
 import subprocess
 aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
@@ -116,7 +116,3 @@ demo = gr.Interface(
     theme="default",
     examples=[["th.jpg"]]
 )
-'''
-if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=9871, share=True)
-'''

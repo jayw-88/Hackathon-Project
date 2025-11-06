@@ -114,6 +114,6 @@ threading.Thread(target=run_gradio).start()
 
 st.title("")
 
-gradio_interface_url = "http://localhost:7862"
+gradio_interface_url = "http://localhost:7867"
 st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
          unsafe_allow_html=True)

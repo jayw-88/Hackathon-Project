@@ -111,9 +111,19 @@ demo = gr.Interface(
     examples=[["th.jpg"]]
 
 )
-gradio_url = demo.launch(share=True).public_url
+import threading
 
-# Replace the Gradio interface URL with your generated share link
+# Launch Gradio in a background thread
+def launch_gradio():
+    demo.launch(share=True)
+
+threading.Thread(target=launch_gradio).start()
+
+# Wait a few seconds for Gradio to start
+time.sleep(5)
+
+# Manually paste the share URL printed in the terminal here
+gradio_url = "https://your-gradio-url.gradio.live"  # Replace with actual URL
+
+# Embed Gradio in Streamlit
 st.write(f'<iframe src="{gradio_url}" width="800" height="600"></iframe>', unsafe_allow_html=True)
-
-demo.launch(share=True)

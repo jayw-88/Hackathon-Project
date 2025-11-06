@@ -4,13 +4,14 @@ from inference_sdk import InferenceHTTPClient
 from groq import Groq
 import os
 import streamlit as st
-import time 
+import threading
+import time
 
 # Display Streamlit content
-st.title("")
+st.title("AI Fossil Scanner")
 
 # Initialize Groq AI API key
-client = Groq(api_key = os.environ["GROQ_API_KEY"])
+client = Groq(api_key=os.environ["GROQ_API_KEY"])
 
 # Initialize Roboflow client
 CLIENT = InferenceHTTPClient(
@@ -53,8 +54,6 @@ def process_image(frame):
     img = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
     cv2.imwrite("temp.jpg", img)
 
-
-
     try:
         result = CLIENT.infer("temp.jpg", model_id=MODEL_ID)
     except Exception as e:
@@ -85,11 +84,9 @@ def process_image(frame):
     label, confidence = predictions[0]["class"], predictions[0]["confidence"]
     user = f"Give a thorough description on {label} Put it in the format following a general one-paragraph description, then a description of physical characteristics and composition. Then put a list of uses and signifance of the artifact. (Don't include sources)"
     chat_completion = client.chat.completions.create(
-                messages=[
-                    {"role": "user", "content": user}
-                ],
-                model="llama-3.1-8b-instant"
-            )
+        messages=[{"role": "user", "content": user}],
+        model="llama-3.1-8b-instant"
+    )
 
     response = chat_completion.choices[0].message.content
     final_img = draw_fixed_label(merged.copy(), label, confidence)
@@ -97,6 +94,7 @@ def process_image(frame):
     info = f"**{label.title()}** — {confidence*100:.2f}%\n**Description:**\n{response}"
     return output, info
 
+# Create Gradio interface
 demo = gr.Interface(
     fn=process_image,
     inputs=gr.Image(type="numpy", label="Upload a Fossil Image"),
@@ -104,26 +102,26 @@ demo = gr.Interface(
         gr.Image(type="numpy", label="Processed Result"),
         gr.Markdown(label="Prediction Details")
     ],
-
     title="AI Fossil Scanner",
-    description="Upload a fossil image; AI will detect it automatically and give a detailed description on the given fossil. Bounding boxes will be outlined with a label card.",
-    theme="default",
-    examples=[["th.jpg"]]
-
+    description="Upload a fossil image; AI will detect it automatically and give a detailed description.",
+    theme="default"
 )
-import threading
 
-# Launch Gradio in a background thread
+# Launch Gradio in a thread and capture the share URL
+gradio_url_container = {}
+
 def launch_gradio():
-    demo.launch(share=True)
+    app = demo.launch(share=True)
+    gradio_url_container["url"] = app.public_url
 
 threading.Thread(target=launch_gradio).start()
 
-# Wait a few seconds for Gradio to start
-time.sleep(5)
-
-# Manually paste the share URL printed in the terminal here
-gradio_url = "https://your-gradio-url.gradio.live"  # Replace with actual URL
+# Wait for Gradio to launch
+time.sleep(10)
 
 # Embed Gradio in Streamlit
-st.write(f'<iframe src="{gradio_url}" width="800" height="600"></iframe>', unsafe_allow_html=True)
+gradio_url = gradio_url_container.get("url", "")
+if gradio_url:
+    st.write(f'<iframe src="{gradio_url}" width="800" height="600"></iframe>', unsafe_allow_html=True)
+else:
+    st.warning("Gradio interface is still launching. Please wait a few seconds and refresh.")

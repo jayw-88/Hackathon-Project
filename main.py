@@ -108,7 +108,7 @@ app = gr.Interface(
 import threading
 
 def run_gradio():
-    app.launch(server_name="0.0.0.0", server_port=7862, share=True)
+    app.launch(server_name="0.0.0.0", share=True)
 
 threading.Thread(target=run_gradio).start()
 

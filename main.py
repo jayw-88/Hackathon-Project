@@ -4,21 +4,11 @@ from inference_sdk import InferenceHTTPClient
 from groq import Groq
 import os
 import streamlit as st
-import time 
+import time
+
 # Display Streamlit content
 st.title("")
 
-'''
-import subprocess
-aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
-
-# Replace the Gradio interface URL with your generated share link
-#gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
-
-# Load the Gradio interface using an iframe
-st.write(f'<iframe src="https://bb9915d41140b6eaca.gradio.live" width="800" height="600"></iframe>',
-         unsafe_allow_html=True)
-'''
 # Initialize Groq AI API key
 client = Groq(api_key = os.environ["GROQ_API_KEY"])
 
@@ -105,7 +95,7 @@ def process_image(frame):
     info = f"**{label.title()}** — {confidence*100:.2f}%\n**Description:**\n{response}"
     return output, info
 
-demo = gr.Interface(
+app = gr.Interface(
     fn=process_image,
     inputs=gr.Image(type="numpy", label="Upload a Fossil Image"),
     outputs=[
@@ -118,5 +108,5 @@ demo = gr.Interface(
     examples=[["th.jpg"]]
 )
 if __name__ == "__main__":
-    demo.launch(inline=True, share=False)
+    app.launch(inline=True, share=False)
 

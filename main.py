@@ -108,5 +108,5 @@ app = gr.Interface(
     examples=[["th.jpg"]]
 )
 if __name__ == "__main__":
-    app.launch(inline=True, share=False)
+    app.launch(inline=True, share=True)
 

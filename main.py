@@ -118,6 +118,6 @@ threading.Thread(target=launch_gradio).start()
 gradio_interface_url = "https://bf7415099b2e7ecd7f.gradio.live"
 
 # Load the Gradio interface using an iframe
-st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
+st.write(f'<iframe src="{gradio_url}" width="800" height="600"></iframe>',
          unsafe_allow_html=True)
 demo.launch(share=True)

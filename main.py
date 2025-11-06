@@ -8,6 +8,7 @@ import time
 # Display Streamlit content
 st.title("")
 
+'''
 import subprocess
 aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
 
@@ -17,7 +18,7 @@ aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
 # Load the Gradio interface using an iframe
 st.write(f'<iframe src="https://bb9915d41140b6eaca.gradio.live" width="800" height="600"></iframe>',
          unsafe_allow_html=True)
-
+'''
 # Initialize Groq AI API key
 client = Groq(api_key = os.environ["GROQ_API_KEY"])
 

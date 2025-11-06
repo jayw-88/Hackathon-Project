@@ -107,14 +107,15 @@ demo = gr.Interface(
     theme="default",
     examples=[["th.jpg"]]
 )
+'''
 import threading
 def launch_gradio():
     demo.launch(share=True)
-
 threading.Thread(target=launch_gradio).start()
+'''
 
 # Replace the Gradio interface URL with your generated share link
-gradio_interface_url = "https://ac1c7be476c5bd2852.gradio.live"
+gradio_interface_url = "https://bf7415099b2e7ecd7f.gradio.live"
 
 # Load the Gradio interface using an iframe
 st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',

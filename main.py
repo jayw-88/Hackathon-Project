@@ -8,6 +8,7 @@ import time
 
 # Display Streamlit content
 st.title("")
+st.set_page_config(page_title="AI Fossil Scanner", layout="wide")
 
 # Initialize Groq AI API key
 client = Groq(api_key = os.environ["GROQ_API_KEY"])

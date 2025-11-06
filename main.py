@@ -119,5 +119,5 @@ app = gr.Interface(
     examples=[["th.jpg"]]
 )
 if __name__ == "__main__":
-    app.launch(server_name="0.0.0.0", server_port=5000, share=True)
+    app.launch(server_name="0.0.0.0", server_port=7862, share=True)
 

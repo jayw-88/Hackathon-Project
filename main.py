@@ -9,19 +9,6 @@ import time
 # Display Streamlit content
 st.title("")
 
-import threading
-def launch_gradio():
-    demo.launch(share=True)
-
-threading.Thread(target=launch_gradio).start()
-
-# Replace the Gradio interface URL with your generated share link
-gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
-
-# Load the Gradio interface using an iframe
-st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
-         unsafe_allow_html=True)
-
 # Initialize Groq AI API key
 client = Groq(api_key = os.environ["GROQ_API_KEY"])
 
@@ -120,3 +107,15 @@ demo = gr.Interface(
     theme="default",
     examples=[["th.jpg"]]
 )
+import threading
+def launch_gradio():
+    demo.launch(share=True)
+
+threading.Thread(target=launch_gradio).start()
+
+# Replace the Gradio interface URL with your generated share link
+gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
+
+# Load the Gradio interface using an iframe
+st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
+         unsafe_allow_html=True)

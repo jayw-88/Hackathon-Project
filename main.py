@@ -7,16 +7,16 @@ import streamlit as st
 import time
 
 # Display Streamlit content
+import threading
+
+def run_gradio():
+    app.launch(server_name="0.0.0.0", server_port=7862, share=True)
+
+threading.Thread(target=run_gradio).start()
+
 st.title("")
 
-import subprocess
-aaa = subprocess.Popen(["gradio", "gradio_interface.py"])
-
-# Replace the Gradio interface URL with your generated share link
-gradio_interface_url = "https://baa03635463a8706a5.gradio.live"
-#http://0.0.0.0:5000
-
-# Load the Gradio interface using an iframe
+gradio_interface_url = "http://localhost:7862"
 st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
          unsafe_allow_html=True)
 

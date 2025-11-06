@@ -6,20 +6,6 @@ import os
 import streamlit as st
 import time
 
-# Display Streamlit content
-import threading
-
-def run_gradio():
-    app.launch(server_name="0.0.0.0", server_port=7862, share=True)
-
-threading.Thread(target=run_gradio).start()
-
-st.title("")
-
-gradio_interface_url = "http://localhost:7862"
-st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
-         unsafe_allow_html=True)
-
 # Initialize Groq AI API key
 client = Groq(api_key = os.environ["GROQ_API_KEY"])
 
@@ -118,5 +104,16 @@ app = gr.Interface(
     theme="default",
     examples=[["th.jpg"]]
 )
-if __name__ == "__main__":
+# Display Streamlit content
+import threading
+
+def run_gradio():
     app.launch(server_name="0.0.0.0", server_port=7862, share=True)
+
+threading.Thread(target=run_gradio).start()
+
+st.title("")
+
+gradio_interface_url = "http://localhost:7862"
+st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
+         unsafe_allow_html=True)

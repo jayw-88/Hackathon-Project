@@ -113,7 +113,6 @@ def run_gradio():
 threading.Thread(target=run_gradio).start()
 
 st.title("")
-
-#gradio_interface_url = ""
+gradio_interface_url = "https://4c59332f5b3360cc4c.gradio.live"
 st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
          unsafe_allow_html=True)

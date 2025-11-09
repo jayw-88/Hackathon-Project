@@ -5,6 +5,7 @@ from groq import Groq
 import os
 import streamlit as st
 import time
+import threading
 
 # Initialize Groq AI API key
 client = Groq(api_key = os.environ["GROQ_API_KEY"])
@@ -95,7 +96,7 @@ def process_image(frame):
 app = gr.Interface(
     fn=process_image,
     inputs=gr.Image(type="numpy", label="Upload a Fossil Image"),
-    outputs=[
+    outputs=[ 
         gr.Image(type="numpy", label="Processed Result"),
         gr.Markdown(label="Prediction Details")
     ],
@@ -104,15 +105,13 @@ app = gr.Interface(
     theme="default",
     examples=[["th.jpg"]]
 )
-# Display Streamlit content
-import threading
 
 def run_gradio():
-    app.launch(server_name="0.0.0.0", share=True)
+    app.launch(share=True)
 
 threading.Thread(target=run_gradio).start()
+time.sleep(2)
 
 st.title("")
-gradio_interface_url = "https://4c59332f5b3360cc4c.gradio.live"
-st.write(f'<iframe src="{gradio_interface_url}" width="800" height="600"></iframe>',
+st.write('<iframe src="https://4c59332f5b3360cc4c.gradio.live" width="800" height="600"></iframe>',
          unsafe_allow_html=True)

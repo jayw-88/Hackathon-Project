@@ -113,5 +113,5 @@ threading.Thread(target=run_gradio).start()
 time.sleep(2)
 
 st.title("")
-st.write('<iframe src="https://4c59332f5b3360cc4c.gradio.live" width="800" height="600"></iframe>',
+st.write('<iframe src="https://9f17fbb6368346261a.gradio.live" width="800" height="600"></iframe>',
          unsafe_allow_html=True)

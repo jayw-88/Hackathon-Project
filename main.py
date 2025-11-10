@@ -109,4 +109,4 @@ st.title("")
 st.write('<iframe src="https://8bd58af76f58dd5227.gradio.live" width="800" height="600"></iframe>',
          unsafe_allow_html=True)
 if __name__ == "__main__":
-    app.launch(server_name="0.0.0.0", server_port=5000, share = True)
+    app.launch(server_name="0.0.0.0", share = True)

@@ -105,13 +105,15 @@ app = gr.Interface(
     theme="default",
     examples=[["th.jpg"]]
 )
-
+'''
 def run_gradio():
     app.launch(share=True)
 
 threading.Thread(target=run_gradio).start()
 time.sleep(2)
-
+'''
 st.title("")
-st.write('<iframe src="https://9f17fbb6368346261a.gradio.live" width="800" height="600"></iframe>',
+st.write('<iframe src="https://67bb495b08ae4fa96c.gradio.live" width="800" height="600"></iframe>',
          unsafe_allow_html=True)
+if __name__ == "__main__":
+    app.launch(server_name="0.0.0.0", server_port=5000, share = True)

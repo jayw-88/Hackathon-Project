@@ -6,5 +6,5 @@ Created by JW and VM.
 ### How to Run the Application
 This app can be run on Hugging Face by accessing this link: https://huggingface.co/spaces/jayw88/Fossil-Scanner-AI
 
-## Disclaimer:
+### Disclaimer:
 AI can make mistakes. The AI is being trained frequently, so each time it is more accurate in detecting fossils.

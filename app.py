@@ -26,7 +26,7 @@ CLIENT = InferenceHTTPClient(
     api_key="96JPdCoiFFBc91M91y9i"
 )
 
-MODEL_ID = "fossil-scanner-v2-ncp2c-xfqbt/1"
+MODEL_ID = "fossil-scanner-v1-hs3pw/1" #old working version: fossil-scanner-v2-ncp2c-xfqbt/1
 
 def draw_fixed_label(img, label, confidence):
     label_text = label.title()

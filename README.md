@@ -1,5 +1,5 @@
 # AI Fossil Scanner
-An AI App that allows one to upload an image of a fossil and have AI detect what the fossil could possibly be.
+An AI application that allows one to upload an image of a fossil and have AI detect what the fossil could possibly be.
 
 Created by JW and VM.
 

@@ -4,7 +4,8 @@ An AI App that allows one to upload an image of a fossil and have AI detect what
 Created by JW and VM.
 
 ### How to Run the Application
-This app can be run on Hugging Face by accessing this link: https://huggingface.co/spaces/jayw88/Fossil-Scanner-AI
+This app can be run on Hugging Face Spaces by accessing this link:
+https://huggingface.co/spaces/jayw88/Fossil-Scanner-AI
 
 ### Disclaimer:
-AI can make mistakes. The AI is being trained frequently, so each time it is more accurate in detecting fossils.
+The AI can make mistakes and detect inaccurate fossils.

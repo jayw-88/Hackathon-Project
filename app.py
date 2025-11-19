@@ -29,6 +29,8 @@ CLIENT = InferenceHTTPClient(
 
 MODEL_ID ="fossil-scanner-v1-hs3pw/2"
 
+print("Using model:", MODEL_ID)
+
 def draw_fixed_label(img, label, confidence):
     label_text = label.title()
     conf_text = f"{confidence*100:.2f}%"

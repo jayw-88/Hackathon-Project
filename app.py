@@ -12,8 +12,8 @@ custom_theme = Base(
     secondary_hue=colors.zinc,
     neutral_hue=colors.zinc
 ).set(
-    body_background_fill="rgba(255,255,255,0.6)",  # semi-transparent white
-    button_primary_background_fill="#3b82f6",      # blue button
+    body_background_fill="rgba(255,255,255,0.6)",
+    button_primary_background_fill="#3b82f6",
     shadow_drop="drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1))"
 )
 

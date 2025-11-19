@@ -27,7 +27,7 @@ CLIENT = InferenceHTTPClient(
     api_key="cXQEyLSlDBcL2Yz0VbYX"
 )
 
-MODEL_ID ="fossil-scanner-v1-hs3pw/2"
+MODEL_ID ="fossil-scanner-v1-hs3pw"
 
 print("Using model:", MODEL_ID)
 

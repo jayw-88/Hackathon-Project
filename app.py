@@ -23,11 +23,10 @@ client = Groq(api_key=os.environ.get("GROQ_API_KEY", ""))
 # Initialize Roboflow client
 
 CLIENT = InferenceHTTPClient(
-    api_url="https://serverless.roboflow.com",
+    api_url="https://detect.roboflow.com",
     api_key="cXQEyLSlDBcL2Yz0VbYX"
 )
-
-MODEL_ID ="fossil-scanner-v1-hs3pw/2"
+MODEL_ID = "fossil-scanner-v1-hs3pw/2"
 
 def draw_fixed_label(img, label, confidence):
     label_text = label.title()
@@ -118,4 +117,4 @@ app = gr.Interface(
 )
 
 if __name__ == "__main__":
-    app.launch(share = True)
+    app.launch()
